@@ -1,0 +1,35 @@
+algoritmo agendamento
+
+função agendarServico(servico: caractere, data: caractere, hora: caractere)
+    escreva("Agendando o serviço '", servico, "' para o dia ", data, " às ", hora)
+    // Aqui você pode adicionar a lógica para realmente agendar o serviço
+fim função
+
+função verificarDisponibilidade(servico: caractere)
+    constante maxServicosMedios = 2 // Máximo de serviços médios permitidos
+    inteiro servicosMediosAgendados = 0 // Quantidade de serviços médios já agendados
+
+    // Verifica se o serviço é leve
+    se (servico = "Leve") então
+        // Simplesmente agenda o serviço leve
+        agendarServico(servico, "hoje", "agora")
+    senao se (servico = "Medio") então
+        // Conta quantos serviços médios já estão agendados
+        servicosMediosAgendados <- servicosMediosAgendados + 1
+        // Verifica se excedeu o limite de serviços médios
+        se (servicosMediosAgendados > maxServicosMedios) então
+            escreva("Limite de serviços médios atingido. Por favor, escolha outro horário.")
+            retorne
+        fim se
+        // Agenda o serviço médio
+        agendarServico(servico, "amanhã", "à tarde")
+    senao
+        // Se o serviço não for leve nem médio, então é pesado
+        agendarServico(servico, "esta semana", "à noite")
+    fim se
+fim função
+
+// Chamada de exemplo para verificar a disponibilidade de um serviço
+verificarDisponibilidade("Leve")
+verificarDisponibilidade("Medio")
+verificarDisponibilidade("Pesado")
